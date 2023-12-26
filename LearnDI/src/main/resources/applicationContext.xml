@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- type is required if different parametrized constructors available in Entity Class-->
+    <!-- By default type is considered as String if not provided-->
+    <!-- In below case, if a constructor of all Strings is present, then that constructor is called,
+    or else scans the entity class from top to find the first suitable construct available-->
+    <!-- This ambiguity problem to select appropriate constructor is resolved by specifying
+    type="int" and index="0" with all values -->
+    <bean name="addr1" class="org.example.spring.xmlBasedDI.Address" >
+        <constructor-arg value="Surat" />
+        <constructor-arg value="Gujarat" />
+        <constructor-arg value="India" />
+    </bean>
+
+    <bean name="emp1" class="org.example.spring.xmlBasedDI.Employee" >
+        <constructor-arg value="240" type="int" />
+        <constructor-arg value="Ramesh" />
+        <constructor-arg >
+            <list>
+                <value>0897989078</value>
+                <value>4567989078</value>
+                <null/>
+            </list>
+        </constructor-arg>
+        <constructor-arg ref="addr1" />
+    </bean>
+
+    <bean name="addr2" class="org.example.spring.xmlBasedDI.Address" >
+        <property name="city" value="Kanpur" />
+        <property name="state" value="UP" />
+        <property name="country" value="India" />
+    </bean>
+
+    <bean name="emp2" class="org.example.spring.xmlBasedDI.Employee" >
+        <property name="employeeId" value="255" />
+        <property name="employeeName" value="Mahesh" />
+        <property name="contactNumbers">
+            <list>
+                <value>0897989078</value>
+                <value>4567989078</value>
+                <value>4347989078</value>
+                <null/>
+            </list>
+        </property>
+        <property name="address" ref="addr2"/>
+    </bean>
+
+</beans>

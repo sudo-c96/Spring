@@ -1,25 +1,27 @@
 package org.example.spring.xmlBasedDI;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 
-@Component
+
 public class Employee {
     private int employeeId;
-    private int employeeName;
-
-    private String address;
+    private String employeeName;
+    private List<String> contactNumbers;
+    private Address address;
 
     public Employee() {
+        super();
+        System.out.println("Employee -- Default Constructor called");
     }
 
-    public Employee(int employeeId, int employeeName, String address) {
+    public Employee(int employeeId, String employeeName, List<String> contactNumbers, Address address) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
+        this.contactNumbers = contactNumbers;
         this.address = address;
+        System.out.println("Employee -- Parametrized Constructor called");
     }
 
     public int getEmployeeId() {
@@ -27,36 +29,43 @@ public class Employee {
     }
 
     public void setEmployeeId(int employeeId) {
+        System.out.println("Setter - EmployeeID");
         this.employeeId = employeeId;
     }
 
-    public int getEmployeeName() {
+    public String getEmployeeName() {
         return employeeName;
     }
 
-    public void setEmployeeName(int employeeName) {
+    public void setEmployeeName(String employeeName) {
+        System.out.println("Setter - EmployeeName");
         this.employeeName = employeeName;
     }
 
-    public String getAddress() {
+    public List<String> getContactNumbers() {
+        return contactNumbers;
+    }
+
+    public void setContactNumbers(List<String> contactNumbers) {
+        System.out.println("Setter - ContactNos.");
+        this.contactNumbers = contactNumbers;
+    }
+
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
+        System.out.println("Setter - Address");
         this.address = address;
     }
-
-
-
-
-
-
 
     @Override
     public String toString() {
         return "Employee{" +
                 "employeeId=" + employeeId +
-                ", employeeName=" + employeeName +
+                ", employeeName='" + employeeName + '\'' +
+                ", contactNumbers=" + contactNumbers +
                 ", address='" + address + '\'' +
                 '}';
     }
